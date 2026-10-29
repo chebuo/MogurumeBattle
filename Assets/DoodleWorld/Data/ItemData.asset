@@ -18,7 +18,7 @@ MonoBehaviour:
       distance: 5
       power: 2
       remaining: 2
-      icon: {fileID: 21300000, guid: c61fe3a0389231b459f16a8f8eaa0e75, type: 3}
+      icon: {fileID: 21300000, guid: 5c650ce9aec7f2b4ea4e8176dce919f8, type: 3}
     statusEffects: []
     prefab: {fileID: 8842380806726251394, guid: 7ae81f547c6a91b4bb0eef17ee1c81d6, type: 3}
     maxHP: 20
@@ -29,18 +29,18 @@ MonoBehaviour:
       distance: 1
       power: 3
       remaining: 2
-      icon: {fileID: 21300000, guid: 069297898c8c01f45abd227b4914ddcf, type: 3}
+      icon: {fileID: 21300000, guid: e9b2203ff7579e24c8478e7722c0bb05, type: 3}
     statusEffects: []
     prefab: {fileID: 172116851957778879, guid: 358ecd4782448724997bc23922ab44be, type: 3}
     maxHP: 30
     hardness: 5
     rarity: 1
   - itemProp:
-      shape: {fileID: 4299633408758240254, guid: d2ace7d67eca2804395f4e5288601570, type: 3}
+      shape: {fileID: 6527727635706958543, guid: 4cb27e96526aa3b4ea7e2bf57dccc082, type: 3}
       distance: 1.5
       power: 1
       remaining: 8
-      icon: {fileID: 21300000, guid: 580b3ec1e3eeae54bbbf3e20b31c31ba, type: 3}
+      icon: {fileID: 21300000, guid: e9b2203ff7579e24c8478e7722c0bb05, type: 3}
     statusEffects:
     - type: 0
       value: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
       icon: {fileID: 21300000, guid: 580b3ec1e3eeae54bbbf3e20b31c31ba, type: 3}
     statusEffects:
     - type: 2
-      value: 1
+      value: 0.5
     prefab: {fileID: 2619460393197344696, guid: e7ffc66c66da1b646b36e4bdda43bddc, type: 3}
     maxHP: 10
     hardness: 5
