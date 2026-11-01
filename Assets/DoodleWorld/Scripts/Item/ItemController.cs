@@ -9,8 +9,11 @@ public class ItemController : MonoBehaviour
     private GameObject owner;
 
     public bool isAttack=true;
+    private bool isHit=false;
+    private bool damageProccess=true;
 
     IWeapon weapon;
+    MeshRenderer[] meshRenderers;
 
     public void Init(float attackForce,GameObject owner)
     {
@@ -23,23 +26,53 @@ public class ItemController : MonoBehaviour
     void Awake()
     {
         weapon=this.GetComponent<IWeapon>();
+        meshRenderers=this.GetComponentsInChildren<MeshRenderer>();
 
-        weapon.IsAttack.Where(isAttack=>!isAttack).Take(1).Subscribe(_=>{
-            Destroy(this.gameObject);
+        weapon.IsAttack.Where(isAttack=>!isAttack).Take(1).Subscribe(async _=>{
+            await DestroyAfterHit();
+        }).AddTo(this);
+
+        weapon.IsHit.Where(hit => hit).Subscribe(_ =>
+        {
+            Debug.Log("isHit:"+isHit);
+            this.isHit=true;
         }).AddTo(this);
     }
-    
+
     async UniTask Attack()
     {
         await UniTask.WaitUntil(()=>owner!=null);
         await weapon.Attack(owner,power);
-        Debug.Log(power);
     }
 
-    private void OnTriggerEnter(Collider col)
+    private async UniTask DestroyAfterHit()
     {
-        if(col.gameObject==owner)return;
-        IDamageable damageable=col.GetComponent<IDamageable>();
-        if(damageable!=null)damageable.TakeDamage((int)power);
+        Debug.Log("damageProccess:"+damageProccess);
+        // ヒット処理が終わるまで待つ
+        await UniTask.WaitUntil(() => !damageProccess);
+        for(int i = 0; i < meshRenderers.Length; i++)
+        {
+            meshRenderers[i].enabled=false;
+        }
+        
+        Debug.Log("damageProccess:"+damageProccess+"finished");
+        await UniTask.Delay(2000);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        Debug.Log(this.gameObject.name+":"+isHit);
+        if(!isHit)return;
+        Debug.Log("isHit"+isHit);
+        if(col.gameObject!=owner){
+             Debug.Log("attack!!");
+            IDamageable damageable=col.GetComponent<IDamageable>();
+            if(damageable!=null)damageable.TakeDamage((int)power);
+        }
+       
+        isHit=false;
+        damageProccess=false;
+        Debug.Log($"isHit:{isHit},damageProccess:{damageProccess}");
     }
 }
