@@ -25,11 +25,16 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] TerrainGenerator terrainGenerator;
     PlayerManager playerManager;
+    PlayerEffectController playerEffectController;
+
+    [SerializeField]AudioSource audioSource;
+    [SerializeField]AudioClip digSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerManager = this.GetComponent<PlayerManager>();
+        playerEffectController=this.GetComponent<PlayerEffectController>();
     }
     public async UniTask Init()
     {
@@ -86,7 +91,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Vector3 digPos = transform.position + transform.forward * 0.1f+transform.up*(radius/2);
-        AddDigAmount(terrainGenerator.Dig(digPos, radius));
+        float amount=terrainGenerator.Dig(digPos,radius);
+        AddDigAmount(amount);
+        PlayDigSound(amount);
         DamageArea(digPos, radius)?.TakeDamage(damage);
     }
 
@@ -105,6 +112,16 @@ public class PlayerController : MonoBehaviour
         return null;
     }
 
+    private void PlayDigSound(float amount)
+    {
+        if (amount <= 0) return;
+
+    // AudioSourceやAudioClipが設定されていなければ終了
+        if (audioSource == null || digSound == null) return;
+        audioSource.volume=amount/2;
+        audioSource.PlayOneShot(digSound);
+    }
+
     private void GetItem(Collider col)
     {
         if (col.gameObject.CompareTag("Item"))
@@ -115,6 +132,21 @@ public class PlayerController : MonoBehaviour
             if (itemParams.itemProp.shape == null)
             {
                 playerManager.UseStatusEffect(itemParams.statusEffects[0]);
+                switch (itemParams.statusEffects[0].type)
+                {
+                    case StatusEffectType.AttackForce:
+                        playerEffectController.AttackEffect().Forget();
+                        break;
+                    case StatusEffectType.WalkSpeed:
+                        playerEffectController.WalkEffect().Forget();
+                        break;
+                    case StatusEffectType.DigRadius:
+                        playerEffectController.DigEffect().Forget();
+                        break;
+                    case StatusEffectType.RecoverHP:
+                        playerEffectController.HealEffect().Forget();
+                        break;
+                }
                 return;
             }
             else
@@ -161,15 +193,19 @@ public class PlayerController : MonoBehaviour
         {
             case StatusEffectType.WalkSpeed:
                 levelUpEffect.value=levelUpWalkSpeed;
+                playerEffectController.WalkEffect().Forget();
                 break;
             case StatusEffectType.AttackForce:
                 levelUpEffect.value=levelUpAttackForce;
+                playerEffectController.AttackEffect().Forget();
                 break;
             case StatusEffectType.DigRadius:
                 levelUpEffect.value=levelUpDigRadius;
+                playerEffectController.DigEffect().Forget();
                 break;
             case StatusEffectType.RecoverHP:
                 levelUpEffect.value=levelUpRecoverHP;
+                playerEffectController.HealEffect().Forget();
                 break;
             default:
                 levelUpEffect.value=0f;
@@ -182,6 +218,7 @@ public class PlayerController : MonoBehaviour
     private float yRot=0f;
     public void ChangeDir(Vector2 lookValue)
     {  
+        lookValue*=3;
         if (lookValue != Vector2.zero)
         {
             xRot-=lookValue.y;
