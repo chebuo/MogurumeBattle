@@ -1105,15 +1105,23 @@ PrefabInstance:
     - target: {fileID: 820595937177642812, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 21300000, guid: ff5566387deb1644f9c72416eca7c220, type: 3}
     - target: {fileID: 5127844399234728192, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1629591890}
     - target: {fileID: 5127844399234728192, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
+      propertyPath: levelUpWalkSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5127844399234728192, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 930885995}
+    - target: {fileID: 5127844399234728192, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
+      propertyPath: levelUpAttackForce
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5127844399234728192, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: itemList.Array.size
       value: 1
@@ -1170,6 +1178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 7570127063920850993, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8033600537122187932, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1181,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 8816985947925411548, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 069297898c8c01f45abd227b4914ddcf, type: 3}
+      objectReference: {fileID: 21300000, guid: c61fe3a0389231b459f16a8f8eaa0e75, type: 3}
     - target: {fileID: 8816985947925411548, guid: 55e82b2c609132d4aa2dc44045aa5062, type: 3}
       propertyPath: m_Color.b
       value: 1
