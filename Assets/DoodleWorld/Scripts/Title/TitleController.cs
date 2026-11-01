@@ -15,7 +15,7 @@ public class TitleController : MonoBehaviour
 
     public void OnClickTitleButton()
     {
-        ChangeState(TitleState.modeSelect);
+        ChangeState(TitleState.playerSelect);
     }
 
     public void OnClickSettingsButton()

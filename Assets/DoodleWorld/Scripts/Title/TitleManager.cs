@@ -94,7 +94,7 @@ public class TitleManager : MonoBehaviour
         modeScreen.SetActive(activeScreen == modeScreen);
         playerScreen.SetActive(activeScreen == playerScreen);
         startScreen.SetActive(activeScreen==startScreen);
-        returnButton.SetActive(!titleScreen.activeSelf);
+        //returnButton.SetActive(!titleScreen.activeSelf);
     }
 
     public void SelectMode(GameMode mode)

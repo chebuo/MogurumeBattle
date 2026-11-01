@@ -17,7 +17,7 @@ public class ResultManager : MonoBehaviour
         string winnerIdx=BattleManager.winnerIdx.ToString();
         while (currentState == ResultState.show)
         {
-            if(BattleManager.winnerIdx!=-1)winnerResult.text=$"{winnerIdx}P WINS!!";
+            if(BattleManager.winnerIdx!=-1&&BattleManager.winnerIdx!=0)winnerResult.text=$"{winnerIdx}P WINS!!";
             else winnerResult.text=$"NO CHANPION";
             await UniTask.WaitUntil(()=>currentState==ResultState.end);
         }
