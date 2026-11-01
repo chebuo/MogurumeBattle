@@ -36,8 +36,6 @@ public class PlayerCanvasController : MonoBehaviour
         itemCountText.text="";
         digAmountImage.fillAmount=0;
         HPGaugeImage.fillAmount=1;
-        Debug.Log(itemIcons.Length);
-        Debug.Log(itemIcons[0].gameObject.name);
         playerController.CurrentItem.Subscribe(item=>{
             if(item==null)
             {
