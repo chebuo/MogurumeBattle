@@ -89,6 +89,7 @@ public class VersusBattleController : MonoBehaviour
     {
         int maxHP=-1;
         int playerNum=0;
+        bool isTie=false;
         for(int i = 0; i < playerManagers.Length; i++)
         {
             var playerManager=playerManagers[i];
@@ -97,8 +98,10 @@ public class VersusBattleController : MonoBehaviour
             {
                 maxHP=playerManager.HP;
                 playerNum=i+1;
+                isTie=false;
             }
+            else if(maxHP==playerManager.HP)isTie=true;
         }
-        return playerNum;
+        return isTie?0:playerNum;
     }
 }

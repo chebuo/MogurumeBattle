@@ -79,7 +79,6 @@ public class SingleBattleController : MonoBehaviour
     private async UniTask StartTestBattle()
     {
         isInitialized = true;
-        Debug.Log("[SingleBattleController] テストバトルを開始します。");
 
         // 1. PlayerManagerの取得と初期化
         if (playerManager == null)
@@ -137,7 +136,7 @@ public class SingleBattleController : MonoBehaviour
         else
         {
             // BattleManagerが無い場合でもプレイヤー単体でテストできるようにするフォールバック
-            Debug.LogWarning("[SingleBattleController] シーン内にBattleManagerが見つかりません。Playerの入力を直接開始します。");
+            //Debug.LogWarning("[SingleBattleController] シーン内にBattleManagerが見つかりません。Playerの入力を直接開始します。");
             if (playerManager != null)
             {
                 playerManager.StartInput();

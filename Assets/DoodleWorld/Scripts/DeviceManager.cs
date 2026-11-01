@@ -9,6 +9,7 @@ public class DeviceManager : MonoBehaviour
 {
     [SerializeField] private int minPlayer = 2;
     [SerializeField] private int maxPlayer = 4;
+    public static int playerCount=0;
 
     private Dictionary<int, PlayerJoinData> playerDevices = new();
 
@@ -23,6 +24,7 @@ public class DeviceManager : MonoBehaviour
     private void OnEnable()
     {
         buttonPressSubscription =InputSystem.onAnyButtonPress.Call(OnButtonPressed);
+        playerCount=GetPlayerCount();
     }
 
     private void OnDisable()
